@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MediaCapturePreviewDemo
+namespace MediaCaptureFileDemo
 {
     /// <summary>
     /// Interaction logic for App.xaml

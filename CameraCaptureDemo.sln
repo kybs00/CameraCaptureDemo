@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraPreviewDemo", "CameraCaptureDemo\CameraPreviewDemo.csproj", "{9B5C2867-7AC2-4AE2-B7AB-93D0A4503EF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCapturePreviewDemo", "CameraCaptureDemo\MediaCapturePreviewDemo.csproj", "{9B5C2867-7AC2-4AE2-B7AB-93D0A4503EF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCaptureFileDemo", "CameraCaputureDemo\MediaCaptureFileDemo.csproj", "{6B5E795C-59C2-4682-A4E1-B44ED2FDE730}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCapturePreviewByFrameDemo", "CameraCaptureBytesDemo\MediaCapturePreviewByFrameDemo.csproj", "{BB8AA218-7D75-42C6-BDD7-111D04126D27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCapturePreviewByBytesDemo", "CameraPreviewByFrameDemo\MediaCapturePreviewByBytesDemo.csproj", "{A5EB6623-28AC-4EE9-916B-F4A4DCA2CAF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{9B5C2867-7AC2-4AE2-B7AB-93D0A4503EF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B5C2867-7AC2-4AE2-B7AB-93D0A4503EF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B5C2867-7AC2-4AE2-B7AB-93D0A4503EF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B5E795C-59C2-4682-A4E1-B44ED2FDE730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B5E795C-59C2-4682-A4E1-B44ED2FDE730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B5E795C-59C2-4682-A4E1-B44ED2FDE730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B5E795C-59C2-4682-A4E1-B44ED2FDE730}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB8AA218-7D75-42C6-BDD7-111D04126D27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB8AA218-7D75-42C6-BDD7-111D04126D27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB8AA218-7D75-42C6-BDD7-111D04126D27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB8AA218-7D75-42C6-BDD7-111D04126D27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5EB6623-28AC-4EE9-916B-F4A4DCA2CAF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5EB6623-28AC-4EE9-916B-F4A4DCA2CAF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5EB6623-28AC-4EE9-916B-F4A4DCA2CAF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5EB6623-28AC-4EE9-916B-F4A4DCA2CAF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

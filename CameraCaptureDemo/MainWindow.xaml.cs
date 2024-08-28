@@ -4,10 +4,10 @@ using Windows.Media.Capture;
 using Windows.UI.Xaml.Controls;
 using Button = Windows.UI.Xaml.Controls.Button;
 
-namespace CameraPreviewDemo
+namespace MediaCapturePreviewDemo
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// 摄像头显示Demo，通过UWP-WindowsXamlHost承载画面（置顶），直接用CaptureElement渲染速度很快。实现逻辑同windows系统相机
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -45,7 +45,7 @@ namespace CameraPreviewDemo
             _mediaCapture.StopPreviewAsync();
         }
 
-        private async void TestButton_OnClick(object sender, RoutedEventArgs e)
+        private async void StartButton_OnClick(object sender, RoutedEventArgs e)
         {
             _mediaCapture = new MediaCapture();
             var videos = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);

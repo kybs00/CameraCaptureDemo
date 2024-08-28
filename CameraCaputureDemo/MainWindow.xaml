@@ -1,13 +1,14 @@
-﻿<Window x:Class="MediaCapturePreviewDemo.MainWindow"
+﻿<Window x:Class="MediaCaptureFileDemo.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:xamlHost="clr-namespace:Microsoft.Toolkit.Wpf.UI.XamlHost;assembly=Microsoft.Toolkit.Wpf.UI.XamlHost"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="TestButton" Content="打开摄像头" Click="StartButton_OnClick"></Button>
-        <xamlHost:WindowsXamlHost x:Name="VideoViewHost" Visibility="Collapsed"/>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="StartButton" Content="开始录制" Click="StartButton_OnClick"></Button>
+            <Button x:Name="StopButton" Content="结束录制" Click="StopButton_OnClick"></Button>
+        </StackPanel>
     </Grid>
 </Window>

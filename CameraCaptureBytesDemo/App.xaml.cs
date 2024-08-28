@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MediaCapturePreviewDemo
+namespace MediaCapturePreviewByFrameDemo
 {
     /// <summary>
     /// Interaction logic for App.xaml

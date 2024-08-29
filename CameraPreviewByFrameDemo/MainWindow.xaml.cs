@@ -75,26 +75,26 @@ namespace MediaCapturePreviewByBytesDemo
             }
             return bitmapImage;
         }
-        public async Task<byte[]> SoftwareBitmapToByteArrayAsync(SoftwareBitmap softwareBitmap)
-        {
-            // 使用InMemoryRandomAccessStream来存储图像数据
-            using var stream = new InMemoryRandomAccessStream();
-            // 创建位图编码器
-            var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
-            // 转换为BGRA8格式，如果当前格式不同
-            var bitmap = SoftwareBitmap.Convert(softwareBitmap, BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
-            encoder.SetSoftwareBitmap(bitmap);
-            await encoder.FlushAsync();
-            bitmap.Dispose();
+    public async Task<byte[]> SoftwareBitmapToByteArrayAsync(SoftwareBitmap softwareBitmap)
+    {
+        // 使用InMemoryRandomAccessStream来存储图像数据
+        using var stream = new InMemoryRandomAccessStream();
+        // 创建位图编码器
+        var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
+        // 转换为BGRA8格式，如果当前格式不同
+        var bitmap = SoftwareBitmap.Convert(softwareBitmap, BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
+        encoder.SetSoftwareBitmap(bitmap);
+        await encoder.FlushAsync();
+        bitmap.Dispose();
 
-            // 读取字节数据
-            using var reader = new DataReader(stream.GetInputStreamAt(0));
-            byte[] byteArray = new byte[stream.Size];
-            await reader.LoadAsync((uint)stream.Size);
-            reader.ReadBytes(byteArray);
+        // 读取字节数据
+        using var reader = new DataReader(stream.GetInputStreamAt(0));
+        byte[] byteArray = new byte[stream.Size];
+        await reader.LoadAsync((uint)stream.Size);
+        reader.ReadBytes(byteArray);
 
-            return byteArray;
-        }
+        return byteArray;
+    }
 
         private async void StopButton_OnClick(object sender, RoutedEventArgs e)
         {

@@ -11,13 +11,12 @@ namespace MediaCaptureFileDemo
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MediaCapture _mediaCapture;
-        private InMemoryRandomAccessStream _randomAccessStream;
-
         public MainWindow()
         {
             InitializeComponent();
         }
+        private MediaCapture _mediaCapture;
+        private InMemoryRandomAccessStream _randomAccessStream;
         private async void StartButton_OnClick(object sender, RoutedEventArgs e)
         {
             // 1. 初始化 MediaCapture 对象
@@ -42,7 +41,6 @@ namespace MediaCaptureFileDemo
         {
             // 停止录制
             await _mediaCapture.StopRecordAsync();
-
             // 处理录制后的数据,保存至"C:\Users\XXX\Videos\RecordedVideo.mp4"
             var storageFolder = Windows.Storage.KnownFolders.VideosLibrary;
             var file = await storageFolder.CreateFileAsync("RecordedVideo.mp4", Windows.Storage.CreationCollisionOption.GenerateUniqueName);

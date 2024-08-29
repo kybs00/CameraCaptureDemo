@@ -37,56 +37,56 @@ namespace MediaCapturePreviewByFrameDemo
             VideoViewHost.Child = mainGrid;
         }
 
-        private async void StartButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            VideoViewHost.Visibility = Visibility.Visible;
+    private async void StartButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        VideoViewHost.Visibility = Visibility.Visible;
 
-            // 1. 初始化 MediaCapture 对象
-            var mediaCapture = new MediaCapture();
-            var settings = new MediaCaptureInitializationSettings()
-            {
-                MemoryPreference = MediaCaptureMemoryPreference.Cpu,
-                StreamingCaptureMode = StreamingCaptureMode.Video,
-            };
-            await mediaCapture.InitializeAsync(settings);
-
-            // 配置视频帧读取器
-            var frameSource = mediaCapture.FrameSources.Values.FirstOrDefault(source => source.Info.MediaStreamType == MediaStreamType.VideoRecord);
-            _frameReader = await mediaCapture.CreateFrameReaderAsync(frameSource, MediaEncodingSubtypes.Argb32);
-            _frameReader.FrameArrived += FrameReader_FrameArrived;
-            await _frameReader.StartAsync();
-        }
-        private async void FrameReader_FrameArrived(MediaFrameReader sender, MediaFrameArrivedEventArgs args)
+        // 1. 初始化 MediaCapture 对象
+        var mediaCapture = new MediaCapture();
+        var settings = new MediaCaptureInitializationSettings()
         {
-            var frame = sender.TryAcquireLatestFrame();
-            if (frame != null)
+            MemoryPreference = MediaCaptureMemoryPreference.Cpu,
+            StreamingCaptureMode = StreamingCaptureMode.Video,
+        };
+        await mediaCapture.InitializeAsync(settings);
+
+    // 配置视频帧读取器
+    var frameSource = mediaCapture.FrameSources.Values.FirstOrDefault(source => source.Info.MediaStreamType == MediaStreamType.VideoRecord);
+    _frameReader = await mediaCapture.CreateFrameReaderAsync(frameSource, MediaEncodingSubtypes.Argb32);
+    _frameReader.FrameArrived += FrameReader_FrameArrived;
+    await _frameReader.StartAsync();
+    }
+    private async void FrameReader_FrameArrived(MediaFrameReader sender, MediaFrameArrivedEventArgs args)
+    {
+        var frame = sender.TryAcquireLatestFrame();
+        if (frame != null)
+        {
+            var bitmap = frame.VideoMediaFrame?.SoftwareBitmap;
+            if (bitmap != null)
             {
-                var bitmap = frame.VideoMediaFrame?.SoftwareBitmap;
-                if (bitmap != null)
+                // 在这里对每一帧进行处理
+                await Dispatcher.InvokeAsync(async () =>
                 {
-                    // 在这里对每一帧进行处理
-                    await Dispatcher.InvokeAsync(async () =>
-                    {
-                        var bitmapImage = await ConvertSoftwareBitmapToBitmapImageAsync(bitmap);
-                        _captureImage.Source = bitmapImage;
-                    });
-                }
+                    var bitmapImage = await ConvertSoftwareBitmapToBitmapImageAsync(bitmap);
+                    _captureImage.Source = bitmapImage;
+                });
             }
         }
+    }
 
-        private async Task<Windows.UI.Xaml.Media.Imaging.BitmapImage> ConvertSoftwareBitmapToBitmapImageAsync(SoftwareBitmap softwareBitmap)
+    private async Task<Windows.UI.Xaml.Media.Imaging.BitmapImage> ConvertSoftwareBitmapToBitmapImageAsync(SoftwareBitmap softwareBitmap)
+    {
+        var bitmapImage = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
+        using (var stream = new InMemoryRandomAccessStream())
         {
-            var bitmapImage = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
-            using (var stream = new InMemoryRandomAccessStream())
-            {
-                BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
-                encoder.SetSoftwareBitmap(softwareBitmap);
-                await encoder.FlushAsync();
-                stream.Seek(0);
-                await bitmapImage.SetSourceAsync(stream);
-            }
-            return bitmapImage;
+            BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
+            encoder.SetSoftwareBitmap(softwareBitmap);
+            await encoder.FlushAsync();
+            stream.Seek(0);
+            await bitmapImage.SetSourceAsync(stream);
         }
+        return bitmapImage;
+    }
         private async void StopButton_OnClick(object sender, RoutedEventArgs e)
         {
             await _frameReader.StopAsync();

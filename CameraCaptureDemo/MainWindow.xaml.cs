@@ -38,13 +38,6 @@ namespace MediaCapturePreviewDemo
             mainGrid.Children.Add(button);
             VideoViewHost.Child = mainGrid;
         }
-
-        private void CloseButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            VideoViewHost.Visibility = Visibility.Collapsed;
-            _mediaCapture.StopPreviewAsync();
-        }
-
         private async void StartButton_OnClick(object sender, RoutedEventArgs e)
         {
             _mediaCapture = new MediaCapture();
@@ -55,10 +48,16 @@ namespace MediaCapturePreviewDemo
                 StreamingCaptureMode = StreamingCaptureMode.Video,
             };
             await _mediaCapture.InitializeAsync(settings);
-
+            //显示WindowsXamlHost
             VideoViewHost.Visibility = Visibility.Visible;
+            //绑定画面源
             _captureElement.Source = _mediaCapture;
             await _mediaCapture.StartPreviewAsync();
+        }
+        private void CloseButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            VideoViewHost.Visibility = Visibility.Collapsed;
+            _mediaCapture.StopPreviewAsync();
         }
     }
 }
